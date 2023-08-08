@@ -1,55 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LadderMovement : MonoBehaviour
 {
-   private float vertical;
-   private float speed = 0f;
-   private bool isLadder;
-   private bool isClimbing;
+    [SerializeField] private float ClimbingSpeed = 3.0f; 
+    
+    private Rigidbody2D rigidBody;
 
-    [SerializeField] private Rigidbody2D rb;
+    private bool isClimbing;
+    private int ladderCount = 0;
+    private float verticalInput;
+    private float prevGravityScale;
 
-   
-   void update()
-   {
-    vertical = Input.GetAxis("Vertical");
-
-    if (isLadder && Mathf.Abs(vertical) > 0f)
+    void Awake()
     {
-        isClimbing = true;
+        rigidBody = GetComponent<Rigidbody2D>();
+        prevGravityScale = rigidBody.gravityScale;
     }
-   }
-   private void FixedUpdate()
-   {
-    if(isClimbing)
+    
+    void Update() 
     {
-    rb.gravityScale = 0f;
-    rb.velocity = new Vector2(rb.velocity.x, vertical * speed);
+        verticalInput = Input.GetAxis("Vertical");
+        if (!isClimbing && ladderCount > 0 && Mathf.Abs(verticalInput) > 0f)
+        {
+            isClimbing = true;
+        }
     }
-    else
-    {
-     rb.gravityScale = 3f;
+    
+    private void FixedUpdate() 
+    { 
+        if(isClimbing)
+        {
+            rigidBody.gravityScale = 0f; 
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, verticalInput * ClimbingSpeed);
+        }
+        else
+        {
+            rigidBody.gravityScale = prevGravityScale;
+        }
     }
-   }
-
-   
    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
-            isLadder = true;
+            ++ladderCount;
         }
     }
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
-            isLadder = false;
-            isClimbing = false;
+            if (--ladderCount <= 0)
+            {
+                isClimbing = false;
+            }
         }
-
     }
 }
