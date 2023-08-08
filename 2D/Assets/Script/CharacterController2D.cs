@@ -125,11 +125,11 @@ public class CharacterController2D : MonoBehaviour
                 Flip();
             }
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(move, 0), Mathf.Abs(move), m_WhatIsGround);
-            if (hit.collider != null) 
-            {
-                m_Rigidbody2D.velocity = new Vector3(0, m_Rigidbody2D.velocity.y);
-            } 
+           // RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(move, 0), Mathf.Abs(move), m_WhatIsGround);
+           // if (hit.collider != null) 
+           // {
+           //     m_Rigidbody2D.velocity = new Vector3(0, m_Rigidbody2D.velocity.y);
+           // } 
 
         }
         // If the player should jump...
