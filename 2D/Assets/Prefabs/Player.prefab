@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7669183799684106944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 18105973231316749}
   - component: {fileID: 7476927473231275416}
   - component: {fileID: 3672138489317568209}
+  - component: {fileID: 5437275768960418450}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -141,7 +142,7 @@ Transform:
   m_Children:
   - {fileID: 2586044887635519351}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &5938164295838217404
 CapsuleCollider2D:
@@ -175,7 +176,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2}
+  m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.56, y: 0.9}
   m_Direction: 0
 --- !u!50 &2762473347471059269
@@ -193,7 +194,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -230,82 +231,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5077e14c7025e040ab9f7bdfa5361c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 300
+  maxSpeed: 12
   accelerationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0.23111916
-      outSlope: 0.23111916
+      value: 0.5
+      inSlope: 1.5558397
+      outSlope: 1.5558397
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.07039834
+      outWeight: 0.05457226
     - serializedVersion: 3
-      time: 2
-      value: 30
-      inSlope: 0.951174
-      outSlope: 0.951174
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.05404657
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  accelerationScale: 30
   decelerationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      value: 0.5
+      inSlope: 0.029612228
+      outSlope: 0.029612228
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.07964602
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 1.5990564
+      outSlope: 1.5990564
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.053097367
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpHeight:
+  decelerationScale: 40
+  turnSpeed: 30
+  jumpHeight: 3
+  timeToJumpApex: 0.5
+  jumpCutOff: 3
+  airJumpAmount: 0
+  canWallStick: 1
+  canWallJump: 1
+  dashSpeed: 24
+  dashDuration: 0.1
+  dashCooldown: 1.5
+  defaultGravityScale: 1
+  jumpMultiplier: 1
+  fallMultiplier: 2
+  wallStickMultiplier: 0.5
+  groundCheckLength: 0.7
+  groundColliderOffset: {x: 0.35, y: 0, z: 0}
+  wallCheckLength: 0.5
+  wallColliderOffset: {x: 0, y: 0.15, z: 0}
+  groundLayer:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 20
-      inSlope: 1.4458787
-      outSlope: 1.4458787
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.06985294
-    - serializedVersion: 3
-      time: 1
-      value: 50
-      inSlope: 72.04852
-      outSlope: 72.04852
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.05032772
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpAmount: 1
-  gravity: {x: 0, y: -9.8}
-  drawDebug: 1
+    m_Bits: 1
+  drawVelocities: 1
+  drawGroundCheck: 0
+  drawWallCheck: 0
 --- !u!114 &3672138489317568209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,3 +318,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19cb4d067e63ef848b7f97c89b26a4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Actions: {fileID: -944628639613478452, guid: e1d99befe4ba13c4fa706938401662d8, type: 3}
+--- !u!114 &5437275768960418450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8908923986283360129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: e1d99befe4ba13c4fa706938401662d8, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3672138489317568209}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 71edc23c-dc20-4bb9-afa8-a3f9235cf211
+    m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3672138489317568209}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f13333e2-b33d-43a0-aafd-11c02c82730e
+    m_ActionName: Gameplay/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3672138489317568209}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8eea2bec-0723-4fe7-8c5d-2818aa511197
+    m_ActionName: Gameplay/Dash[/Keyboard/shift]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Default
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
